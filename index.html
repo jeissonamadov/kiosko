@@ -59,10 +59,8 @@
 <div class="card">
   <h1>🏪 Kiosko</h1>
   <p class="sub">Escanea o escribe el código de barras</p>
-
   <input type="text" id="codigoInput" placeholder="_ _ _ _ _ _ _ _" autofocus autocomplete="off">
   <p class="hint">El lector llenará esto automáticamente</p>
-
   <div class="resultado" id="resultado">
     <div class="nombre" id="nombreProd"></div>
     <div class="precio" id="precioProd"></div>
@@ -72,13 +70,96 @@
 
 <script>
 const productos = [
-  { codigo: "7702435001234", nombre: "Coca Cola 3 LIT", precio: 12000 },
-  { codigo: "0", nombre: "Coca Cola 3 LIT", precio: 12000 }
-  // Aquí se agregarán más productos
+  { codigo: "7702535024447", nombre: "COCA COLA 3 LITROS NO RETORNABLE", precio: 13000 },
+  { codigo: "7702535001783", nombre: "COCA COLA 2.5 NO RETORNABLE", precio: 9000 },
+  { codigo: "7702535024423", nombre: "COCA COLA 1.5 NO RETORNABLE", precio: 7000 },
+  { codigo: "7702535011799", nombre: "COCA COLA 1.5 ZERO NO RETORNABLE", precio: 7000 },
+  { codigo: "7702535001530", nombre: "COCA COLA 2 LITROS RETORNABLE", precio: 6500 },
+  { codigo: "7702535027127", nombre: "COCA COLA LITRO VIDRIO RETORNABLE", precio: 4000 },
+  { codigo: "7702535011089", nombre: "COCA COLA PERSONAL PLASTICA", precio: 3500 },
+  { codigo: "7702535011089", nombre: "COCA COLA PERSONAL ZERO PLASTICA", precio: 3500 },
+  { codigo: "77011527", nombre: "COCA COLA PERSONAL VIDRIO RETORNABLE", precio: 1600 },
+  { codigo: "", nombre: "COCA COLA PLASTICO PEQUEÑA", precio: 2000 },
+  { codigo: "7702090063547", nombre: "COCA COLA PLASTICO ZERO PEQUEÑA", precio: 1800 },
+  { codigo: "", nombre: "POSTOBON 3 LITROS NO RETORNABLE", precio: 9000 },
+  { codigo: "7702192107675", nombre: "POSTOBON 2.5 LITROS NO RETORNABLE", precio: 6500 },
+  { codigo: "", nombre: "POSTOBON 1.5 LITRO NO RETORNABLE", precio: 5000 },
+  { codigo: "7702090003314", nombre: "POSTOBON 1 ECONOLITRO", precio: 5000 },
+  { codigo: "7702192238850", nombre: "POSTOBON 2 LITROS RETORNABLE", precio: 5000 },
+  { codigo: "7702090032031", nombre: "POSTOBON PERSONAL PLASTICO", precio: 2800 },
+  { codigo: "", nombre: "POSTOBON LITRO VIDRIO", precio: 3200 },
+  { codigo: "", nombre: "POSTOBON PEQUEÑA VIDRIO", precio: 1400 },
+  { codigo: "77042651", nombre: "AGUA MANZANA PEQUEÑA", precio: 1600 },
+  { codigo: "7702535027868", nombre: "AGUA MANZANA LITRO", precio: 5000 },
+  { codigo: "7702535011706", nombre: "QUATTRO 1.5 NO RETORNABLE", precio: 5000 },
+  { codigo: "7702535011706", nombre: "SPRITE 1.5 NO RETORNABLE", precio: 5000 },
+  { codigo: "7702535012079", nombre: "QUATRO PERSONAL PLASTICA", precio: 3000 },
+  { codigo: "7702535012079", nombre: "SPRITE PERSONAL PLASTICA", precio: 3000 },
+  { codigo: "", nombre: "BRETAÑA 1.5 NO RETORNABLE PLASTICA", precio: 5000 },
+  { codigo: "7702090020847", nombre: "BRETAÑA PERSONAL VIDRIO NO RETORNABLE", precio: 3500 },
+  { codigo: "7709004927773", nombre: "SODA POOL", precio: 1500 },
+  { codigo: "7702090063547", nombre: "AGUA PEQUEÑA", precio: 1000 },
+  { codigo: "7702090063547", nombre: "AGUA GAS CRISTAL PEQUEÑA", precio: 1000 },
+  { codigo: "7709237598597", nombre: "AGUA LITRO POOL", precio: 2500 },
+  { codigo: "7709237598597", nombre: "AGUA LITRO CRISTAL", precio: 2500 },
+  { codigo: "7702090048643", nombre: "SODA HATSU PERSONAL VIDRIO", precio: 3500 },
+  { codigo: "", nombre: "GLACIAL 1 LITRO", precio: 3000 },
+  { codigo: "7708507552666", nombre: "BIG COLA 1.5 LITROS", precio: 4000 },
+  { codigo: "7707244560262", nombre: "BIG COLA PERSONAL PLASTICO", precio: 1500 },
+  { codigo: "7700634002946", nombre: "GASEOSA SIP PEQUEÑA", precio: 1200 },
+  { codigo: "7702004013842", nombre: "PONY LITRO PLASTICO", precio: 5000 },
+  { codigo: "7702004013514", nombre: "PONY 1.5 LITROS PLASTICO", precio: 7500 },
+  { codigo: "7702004025890", nombre: "PONY 2 LITROS PLASTICO", precio: 8000 },
+  { codigo: "", nombre: "PONY PERSONAL VIDRIO RETORNABLE", precio: 3000 },
+  { codigo: "", nombre: "PONY MINI", precio: 2200 },
+  { codigo: "7702004013484", nombre: "PONY PERSONAL PLASTICO NO RETORNABLE", precio: 3200 },
+  { codigo: "7707133095097", nombre: "HIT LITRO CAJA", precio: 5000 },
+  { codigo: "7707133042039", nombre: "HIT PEQUEÑO CAJA", precio: 1700 },
+  { codigo: "", nombre: "HIT 1.5 LITROS PLASTICO NO RETORNABLE", precio: 6000 },
+  { codigo: "7707133052670", nombre: "HIT PERSONAL PLASTICO NO RETORNABLE", precio: 3500 },
+  { codigo: "7707133052670", nombre: "JUGO DEL VALLE PERSONAL PLASTICO", precio: 2500 },
+  { codigo: "7702535022061", nombre: "JUGO DEL VALLE 1.5 LITROS", precio: 5000 },
+  { codigo: "7702617487368", nombre: "JUGO CALIFORNIA PERSONAL", precio: 3200 },
+  { codigo: "7702617486545", nombre: "JUGO CALIFORNIA PLASTICO 1.2 LITROS", precio: 7500 },
+  { codigo: "7708092371512", nombre: "NECTAR POOL PERSONAL PLASTICO", precio: 2800 },
+  { codigo: "7708092371284", nombre: "NECTAR POOL CAJITA", precio: 2000 },
+  { codigo: "7708092371895", nombre: "NECTAR POOL LITRO PLASTICO", precio: 7500 },
+  { codigo: "7702354946135", nombre: "SAVILOE PEQUEÑO", precio: 3000 },
+  { codigo: "7702354946210", nombre: "SAVILOE MEDIANO", precio: 3500 },
+  { codigo: "7702014566000", nombre: "COMPOTA", precio: 3500 },
+  { codigo: "7702354929503", nombre: "VIVE 100 PEQUEÑO", precio: 2500 },
+  { codigo: "9002490280963", nombre: "REDBUL LATA", precio: 6000 },
+  { codigo: "7702354958817", nombre: "VIVE 100 LATA", precio: 2500 },
+  { codigo: "7702354939984", nombre: "VIVE 100 GRANDE", precio: 3000 },
+  { codigo: "7702090071849", nombre: "SPEED MAX LATA", precio: 2500 },
+  { codigo: "7702090050974", nombre: "SPEED MAX LITRO", precio: 4500 },
+  { codigo: "7702810618002", nombre: "YOGURT CAJA COLECHERA", precio: 4500 },
+  { codigo: "7702001042012", nombre: "YOGURT ALPINA ORIGINAL", precio: 3200 },
+  { codigo: "7702001041923", nombre: "YOX", precio: 3000 },
+  { codigo: "7702001047666", nombre: "YOGO YOGO", precio: 2200 },
+  { codigo: "7702001047154", nombre: "YOGO PREMIO", precio: 4000 },
+  { codigo: "7702001116973", nombre: "BOGGY", precio: 2800 },
+  { codigo: "7702001086023", nombre: "BONYURT ALPINA", precio: 5200 },
+  { codigo: "7702001106684", nombre: "YOGO CEREAL", precio: 3200 },
+  { codigo: "7702001044504", nombre: "AVENA NORMAL VASO ALPINA", precio: 4000 },
+  { codigo: "7702001084999", nombre: "AVENA FINESS", precio: 4500 },
+  { codigo: "", nombre: "AVENA DESLACTOSADA VASO ALPINA", precio: 4000 },
+  { codigo: "7702001103478", nombre: "LECHE ALPINA DESLACTOSADO MEDIO LITRO", precio: 2800 },
+  { codigo: "", nombre: "LECHE ALPINA DESLACTOSADO MAXILITRO", precio: 6500 },
+  { codigo: "7707727657304", nombre: "CODELAC LITRO", precio: 5000 },
+  { codigo: "7707727655881", nombre: "CODELAC MEDIO LITRO", precio: 2300 },
+  { codigo: "", nombre: "CODELAC CUARTO LECHE", precio: 1300 },
+  { codigo: "7707363590065", nombre: "CODELAC MAXILITRO ENTERA", precio: 5500 },
+  { codigo: "", nombre: "CANTARO LITRO", precio: 5000 },
+  { codigo: "", nombre: "COLANTA MAXILITRO DESLACTOSADO", precio: 6500 },
+  { codigo: "7702129004510", nombre: "COLANTA MEDIO LITRO DESLACTOSADO", precio: 2800 },
+  { codigo: "7702810004478", nombre: "COOLECHERA MAXILITRO ENTERA", precio: 5500 },
+  { codigo: "7702810004478", nombre: "COOLECHERA MAXILITRO DESLACTOSADA", precio: 6500 },
+  { codigo: "7702532011105", nombre: "ALASKA DESMANCHADOR", precio: 7500 }
 ];
 
 const db = {};
-productos.forEach(p => db[p.codigo.trim()] = p);
+productos.forEach(p => { if (p.codigo) db[p.codigo.trim()] = p; });
 
 const input = document.getElementById("codigoInput");
 const resultado = document.getElementById("resultado");
